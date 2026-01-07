@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .calendar {
+      max-width: 350px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .header button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .header button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .day {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #eee;
+    }
+    .day-name {
+      font-weight: bold;
+      background: #f0f0f0;
+    }
+    .empty {
+      border: none;
+    }
+    .highlighted {
+      background: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+    }
+    .event-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 5px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      white-space: nowrap;
+      display: none;
+      z-index: 10;
+      margin-bottom: 5px;
+    }
+    .highlighted:hover .event-tooltip {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="header">
+      <button id="prev">&lt;</button>
+      <span id="monthYear"></span>
+      <button id="next">&gt;</button>
+    </div>
+    <div class="days" id="calendar"></div>
+  </div>
+
+  <script>
+    // ADD YOUR DATES AND EVENTS HERE (format: 'YYYY-MM-DD': 'Event Name')
+    const myDates = {
+      '2025-01-15': 'Team Meeting',
+      '2025-01-22': 'Project Deadline',
+      '2025-02-05': 'Conference',
+      '2025-02-14': 'Valentine\'s Day',
+      '2025-03-10': 'Review Session'
+    };
+
+    const dateKeys = Object.keys(myDates);
+    const minDate = new Date(Math.min(...dateKeys.map(d => new Date(d))));
+    const maxDate = new Date(Math.max(...dateKeys.map(d => new Date(d))));
+    
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    const minMonth = minDate.getMonth();
+    const minYear = minDate.getFullYear();
+    const maxMonth = maxDate.getMonth();
+    const maxYear = maxDate.getFullYear();
+
+    function render() {
+      const cal = document.getElementById('calendar');
+      const monthYear = document.getElementById('monthYear');
+      
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      
+      monthYear.textContent = new Date(currentYear, currentMonth).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+
+      cal.innerHTML = '';
+      
+      ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'day day-name';
+        el.textContent = d;
+        cal.appendChild(el);
+      });
+
+      for (let i = 0; i < firstDay; i++) {
+        const el = document.createElement('div');
+        el.className = 'day empty';
+        cal.appendChild(el);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const el = document.createElement('div');
+        el.className = 'day';
+        el.textContent = day;
+        
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        if (myDates[dateStr]) {
+          el.classList.add('highlighted');
+          const tooltip = document.createElement('div');
+          tooltip.className = 'event-tooltip';
+          tooltip.textContent = myDates[dateStr];
+          el.appendChild(tooltip);
+        }
+        
+        cal.appendChild(el);
+      }
+
+      document.getElementById('prev').disabled = 
+        currentYear < minYear || (currentYear === minYear && currentMonth <= minMonth);
+      document.getElementById('next').disabled = 
+        currentYear > maxYear || (currentYear === maxYear && currentMonth >= maxMonth);
+    }
+
+    document.getElementById('prev').addEventListener('click', () => {
+      if (currentYear > minYear || (currentYear === minYear && currentMonth > minMonth)) {
+        currentMonth--;
+        if (currentMonth < 0) {
+          currentMonth = 11;
+          currentYear--;
+        }
+        render();
+      }
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+      if (currentYear < maxYear || (currentYear === maxYear && currentMonth < maxMonth)) {
+        currentMonth++;
+        if (currentMonth > 11) {
+          currentMonth = 0;
+          currentYear++;
+        }
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

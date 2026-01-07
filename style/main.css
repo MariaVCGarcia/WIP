@@ -129,7 +129,66 @@ img {
     display: flex;
 }
 /*calender*/
-
+.calendar {
+      max-width: 350px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .header button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .header button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .day {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #eee;
+    }
+    .day-name {
+      font-weight: bold;
+      background: #f0f0f0;
+    }
+    .empty {
+      border: none;
+    }
+    .highlighted {
+      background: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+    }
+    .event-tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 5px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      white-space: nowrap;
+      display: none;
+      z-index: 10;
+      margin-bottom: 5px;
+    }
+    .highlighted:hover .event-tooltip {
+      display: block;
+    }
 /* Footer 
 footer {
     padding: 8px;
