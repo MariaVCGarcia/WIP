@@ -1,5 +1,9 @@
 const myDates = {
       '2025-12-31':'',
+      '2026-02-02': 'hompage complete',
+      '2026-02-07': 'Pre-production page complete',
+      '2026-04-11': 'production page complete',
+      '2026-04-25': 'Game Demo complete',
       '2026-05-31' : ''
     };
 

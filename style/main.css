@@ -131,7 +131,7 @@ img {
 /*calender*/
 .calendar {
       max-width: 350px;
-      border: 1px solid #ccc;
+      border: 1px solid #380505;
       padding: 10px;
     }
     .header {
@@ -155,17 +155,17 @@ img {
     .day {
       text-align: center;
       padding: 8px;
-      border: 1px solid #eee;
+      border: 1px solid #480b50;
     }
     .day-name {
       font-weight: bold;
-      background: #f0f0f0;
+      background: #efcdf3;
     }
     .empty {
       border: none;
     }
     .highlighted {
-      background: #4CAF50;
+      background: #50024c;
       color: white;
       font-weight: bold;
       cursor: pointer;
