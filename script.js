@@ -1,3 +1,5 @@
+
+/*Data & config*/
 const myDates = {
       '2025-12-31':'',
       '2026-02-02': 'hompage complete',
@@ -7,18 +9,19 @@ const myDates = {
       '2026-05-31' : ''
     };
 
+//Extract the keys (date string) and convert to Date objects to find range  
     const dateKeys = Object.keys(myDates);
     const minDate = new Date(Math.min(...dateKeys.map(d => new Date(d))));
     const maxDate = new Date(Math.max(...dateKeys.map(d => new Date(d))));
-    
+//Global state for the calander 
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
-
+//Boundires for navigation 
     const minMonth = minDate.getMonth();
     const minYear = minDate.getFullYear();
     const maxMonth = maxDate.getMonth();
     const maxYear = maxDate.getFullYear();
-
+/*core render function. rebuilds HTML when month/ changes*/
     function render() {
       const cal = document.getElementById('calendar');
       const monthYear = document.getElementById('monthYear');
@@ -68,7 +71,7 @@ const myDates = {
       document.getElementById('next').disabled = 
         currentYear > maxYear || (currentYear === maxYear && currentMonth >= maxMonth);
     }
-
+/* event litseners*/
     document.getElementById('prev').addEventListener('click', () => {
       if (currentYear > minYear || (currentYear === minYear && currentMonth > minMonth)) {
         currentMonth--;
