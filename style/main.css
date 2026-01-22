@@ -45,23 +45,28 @@ header {
 /*navbar*/
 nav{
     background-color: rgb(114, 79, 129);
-    height: 46.4px;
+    height: 46.6px;
+    top:0;
+    z-index: 1000;
     position:sticky;
 }
 .nav-container{
-    padding: 0px;
-    margin: 0px;
+    display:flex;
     text-align: left;
-    overflow-x: auto;
     white-space:nowrap;
-    height: 46.6;
+    height: 46.6px;
     color: aliceblue;
+}
+.vert-line{
+    width:1px;
+    height:10px;
+    background-color: #efcdf3;
+    margin:0 10px;
 }
 .nav-button{
     text-align: center;
     padding: 14px 16px;
     font-size: 16px;
-    cursor: pointer;
     color: white;
     text-decoration: none;
     display: inline-block;
@@ -75,6 +80,40 @@ nav{
     text-decoration: none;
     display: inline-block;
 }
+/*wraper needs to be in line */
+.dropdown-container{
+    display: inline-block;
+    position: relative;
+}
+/*this trigerss the menu*/
+.dropdown-container .nav-button{
+    display: inline-block;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    top: 46.6px; 
+    left: 0;
+    background-color: #6a3862;
+    min-width: 160px;
+    z-index: 1;
+}
+.dropdown-container:hover .dropdown-content{
+    display: block;
+}
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    text-align: left;
+    display: block; /* Makes them stack vertically */
+}
+.dropdown-content a:hover {
+    background-color: rgb(114, 79, 129);
+}
+
 /*main*/
 header{
     word-wrap: break-word;
