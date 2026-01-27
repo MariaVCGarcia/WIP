@@ -2,7 +2,7 @@
 /*Data & config*/
 const myDates = {
       '2025-12-01':'',
-      '2026-24-01': 'Bonsai Tree research',
+      '2026-01-24': 'Bonsai Tree research',
       '2026-02-02': 'hompage complete',
       '2026-02-07': 'Pre-production page complete',
       '2026-04-11': 'production page complete',
