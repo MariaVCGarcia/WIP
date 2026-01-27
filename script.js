@@ -3,9 +3,16 @@
 const myDates = {
       '2025-12-01':'',
       '2026-01-24': 'Bonsai Tree research',
+      '2026-01-24': 'character consepts',
       '2026-02-02': 'hompage complete',
       '2026-02-07': 'Pre-production page complete',
-      '2026-04-11': 'production page complete',
+      '2026-02-07': 'Background consepts',
+      '2026-02-07': 'game desing doc',
+      '2026-02-21': 'game background art',
+      '2026-02-21': 'script due',
+      '2026-03-7':  'pixel art',
+      '2026-03-28': 'mechanics implementd',
+      '2026-03-28': 'first rought draft due',
       '2026-04-25': 'Game Demo complete',
       '2026-05-31' : ''
     };
